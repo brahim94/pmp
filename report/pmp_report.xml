@@ -1,0 +1,198 @@
+<odoo>
+
+<report
+            id="action_report_pmp_id"
+            model="stock.picking"
+            string="Bon de Livraison"
+            report_type="qweb-pdf"
+            name="pmp_report.pmp"
+            print_report_name="'Bon de Livraison'"
+            />
+
+    <template id="pmp">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                     <style>
+                table, th, td {
+                border: 1px solid black;
+                
+                }
+                
+                table.centre {
+                    margin-left:auto; 
+                    margin-right:auto;
+                    width:100%;
+                }
+                table.empty {
+                    width:350px;
+                    empty-cells:show;
+                }
+                td.empty {
+                    padding:15px;
+                    border: 1px solid black;            
+                }
+                div.a{
+                text-indent: 50px;
+                }
+                div {
+                margin-top:20px;
+                }
+                div.n{
+                margin-left:auto; 
+                margin-right:auto;
+                }        
+                br.b{
+                text-indent: 50px;
+                }
+                th.mark, td.mark {
+                background-color: #88E2FC;
+                color: black;
+                }
+                div.s {
+                width: 40%;
+                border: 1px solid;
+                box-shadow: 1px 3px #888888;
+                text-align:center;
+                vertical-align:center;
+                }
+                td.nobord {
+                border: none;
+                } 
+                th.nobord {
+                border: none;
+                }
+                table.nobord{
+                border: none;
+                }
+                td.empty {
+            
+            border: 1px solid black;
+            
+                }
+                table {
+                margin-top:20px;
+                }
+                td.bord {
+                border: 1px solid black;
+                
+            }
+            th.bord {
+            border: 1px solid black;
+            }
+            td.doted {
+                border: 3px black;
+                border-style: dotted;
+            }
+            th.doted {
+            border: 3px black;
+            border-style: dotted;
+            }
+            table.doted {
+            
+            border-style: dotted;
+            border: 3px black;
+            }
+            
+            #block_container
+            {
+                text-align:center;
+            }
+            #bloc1, #bloc2
+            {
+                display:inline;
+            }
+            div.doted {
+            border-style: dotted;
+            border: 2px black;
+            }
+
+            </style>
+
+            <div style="position:absolute;left:240px;top:60.98px" class="n s">
+                <strong><h4> شهادة التوصل <br>Attestation de décharge</br></h4></strong>
+            </div>
+
+            <div style="position:absolute;left:10px;top:40.98px">
+                <table  class="centro doted" width="15%">
+                    <tr>
+                        <th class="doted" style="vertical-align: top;text-align: center"> code QR</th>
+                    
+                    </tr>
+                    <!-- <tr>
+                        <td>
+                            <table>
+                            <tr> -->
+                                <td width="18%" class="doted" style="vertical-align: top;text-align:top"><span t-field="o.qr_image" t-options='{"widget": "image"}' /></td>
+                            <!-- </tr>
+                            </table>
+                        </td>
+                    </tr> -->
+                </table>
+                    
+                <!-- <div style="position:absolute;left:0px;top:60.98px">
+                    <strong>code QR </strong>
+                    <span t-field="o.qr_image" t-options='{"widget": "image"}' width="40%" />
+                </div> -->
+
+                <div class="cls_009">
+                    <strong>Edité le: </strong>
+                    <br><strong><span t-field="o.date_done"/></strong></br>
+                </div>
+            </div>
+            <div style="text-align: center;position:absolute;left:678px;top:60.98px" class="cls_009">
+                <strong> شهادة التوصل عدد <br> Décharge N° </br></strong>
+                <br><strong><span t-field="o.name"/></strong></br>
+            </div>
+            
+            <table  style="position:absolute;left:0px;top:272.98px" class="centro bord" width="99%">
+                <tr>
+                    <th  style="text-align: center">Bénéficiaire</th>
+                    <td  style="text-align:center" width="50%"><span t-field="o.partner_id.name"/></td>
+                    <th  style="text-align: center">المستفيد</th>
+                </tr>
+                <tr>
+                    <th  style="text-align: center">Lieux de livraison</th>
+                    <td  style="text-align:center" ><span t-field="o.partner_id"/></td>
+                    <th  style="text-align: center">مكان التوزيع</th>
+                </tr>
+            </table>
+
+            <table  style="position:absolute;left:0px;top:410.98px" class="centro bord" width="99%">
+                <thead>
+                    <tr>
+                        <th class="mark" style="text-align: center">ملاحظات<br>Observations</br></th>
+                        <th class="mark" style="text-align: center">الكمية<br>Quantité</br></th>
+                        <th class="mark" style="text-align: center">طبيعة المواد<br>Nature des produits</br></th>
+                        <th class="mark" style="text-align: center">تعيين المواد<br>Désignation</br></th>
+                        <th class="mark" style="text-align: center">الرقم الترتيبي<br>N°</br></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <t t-foreach="o.move_line_ids_without_package" t-as="line">
+                    <tr>
+                        <td  style="text-align:center" ></td>
+                        <td  style="text-align:center" ><span t-field="line.qty_done"/></td>
+                        <td  style="text-align:center" ><span t-field="line.product_id.categ_id"/></td>
+                        <td  style="text-align:center" ><span t-field="line.product_id.name"/> </td>
+                        <td  style="text-align:center" ><span t-field="line.sequence"/></td>
+                    </tr>
+                </t>
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+
+
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,65 @@
+<odoo>
+    <data>
+        <record id="view_stock_picking_inherit_pmp" model="ir.ui.view">
+            <field name="name">PMP STOCK PICKING</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <field name="origin" position="after">
+                    <field name="qr_image" widget="image" width="100" height="100" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_stock_move_line_inherit_tech" model="ir.ui.view">
+            <field name="name">stock.move.line.inherit</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+            <field name="arch" type="xml">           
+                <xpath expr="//field[@name='product_id']" position="before">
+                  <field name="sequence"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <template id="internal_layout_header_inherit" inherit_id="web.internal_layout">
+                <xpath expr="//div[@class='header']" position="replace">
+                    <div class="header">
+                    <table style="margin-left:auto; 
+                    margin-right:auto;
+                    width:100%;
+                    border-bottom: 2px solid black;">
+                    <tr>
+                      <td style="border-bottom: 2px solid black;text-align: center;vertical-align: top" >
+                          <img t-att-src="'/pmp_report/static/src/balance.jpeg'" style="max-height: 100px" alt="Logo" t-options='{"widget": "image"}'/>
+                      </td>
+
+                      <td style="border-bottom: 2px solid black;vertical-align: top;text-align: center; width:40%">
+                          <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 140px" alt="Logo" t-options='{"widget": "image"}'/> 
+                      </td>
+
+                      <td style="border-bottom: 2px solid black;vertical-align: right;text-align: center">
+                          <img t-att-src="'/pmp_report/static/src/logo_royal.png'" style="max-height: 100px" alt="Logo" t-options='{"widget": "image"}'/>
+                      </td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- <template id="test_report" inherit_id="point_of_sale.NumpadWidget">
+        <xpath expr="//div[@class='numpad']" position="replace">
+            <div class="numpad">
+                <t t-extend="PosWidget" >
+                    <div class="col-xs-3">
+                        <img src="/web_genext/static/src/img/logo.png" style="max-height: 90px;"/>
+                    </div>
+                </t>
+            </div>
+        </xpath>
+    </template> -->
+
+
+    </data>
+</odoo>

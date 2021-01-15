@@ -1,0 +1,13 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <templates id="template" xml:space="preserve">
+        <t t-extend="NumpadWidget">
+            <!--         Taxes selector -->
+            <t t-jquery="div.numpad" t-operation="after">
+                <div></div><!-- Your xml code here -->
+            </t>
+        </t>
+    </templates>
+</odoo>
