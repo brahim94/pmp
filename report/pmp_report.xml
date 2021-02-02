@@ -14,23 +14,20 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.internal_layout">
                      <style>
-                table, th, td {
-                border: 1px solid black;
                 
-                }
                 
                 table.centre {
-                    margin-left:auto; 
-                    margin-right:auto;
-                    width:100%;
+                margin-left:auto; 
+                margin-right:auto;
+                width:100%;
                 }
                 table.empty {
-                    width:350px;
-                    empty-cells:show;
+                width:350px;
+                empty-cells:show;
                 }
                 td.empty {
-                    padding:15px;
-                    border: 1px solid black;            
+                padding:15px;
+                border: 1px solid black;            
                 }
                 div.a{
                 text-indent: 50px;
@@ -56,6 +53,10 @@
                 text-align:center;
                 vertical-align:center;
                 }
+                div.sis {
+                text-align:center;
+                vertical-align:center;
+                }
                 td.nobord {
                 border: none;
                 } 
@@ -66,46 +67,41 @@
                 border: none;
                 }
                 td.empty {
-            
-            border: 1px solid black;
-            
+                border: 1px solid black;
                 }
                 table {
                 margin-top:20px;
                 }
                 td.bord {
                 border: 1px solid black;
-                
-            }
-            th.bord {
-            border: 1px solid black;
-            }
-            td.doted {
+                }
+                th.bord {
+                border: 1px solid black;
+                }
+                td.doted {
                 border: 3px black;
                 border-style: dotted;
-            }
-            th.doted {
-            border: 3px black;
-            border-style: dotted;
-            }
-            table.doted {
-            
-            border-style: dotted;
-            border: 3px black;
-            }
-            
-            #block_container
-            {
+                }
+                th.doted {
+                border: 3px black;
+                border-style: dotted;
+                }
+                table.doted {
+                border-style: dotted;
+                border: 3px black;
+                }
+                #block_container
+                {
                 text-align:center;
-            }
-            #bloc1, #bloc2
-            {
+                }
+                #bloc1, #bloc2
+                {
                 display:inline;
-            }
-            div.doted {
-            border-style: dotted;
-            border: 2px black;
-            }
+                }
+                div.doted {
+                border-style: dotted;
+                border: 2px black;
+                }
 
             </style>
 
@@ -114,16 +110,16 @@
             </div>
 
             <div style="position:absolute;left:10px;top:40.98px">
-                <table  class="centro doted" width="15%">
+                <table  class="centro doted" width="25%">
                     <tr>
-                        <th class="doted" style="vertical-align: top;text-align: center"> code QR</th>
+                        <th class="doted" style="vertical-align: center;text-align: center; "> code QR</th>
+                        <td width="52%" class="doted" style="vertical-align: top;text-align:top"><span t-field="o.qr_image" t-options='{"widget": "image"}' /></td>
                     
                     </tr>
                     <!-- <tr>
                         <td>
                             <table>
                             <tr> -->
-                                <td width="18%" class="doted" style="vertical-align: top;text-align:top"><span t-field="o.qr_image" t-options='{"widget": "image"}' /></td>
                             <!-- </tr>
                             </table>
                         </td>
@@ -136,8 +132,8 @@
                 </div> -->
 
                 <div class="cls_009">
-                    <strong>Edité le: </strong>
-                    <br><strong><span t-field="o.date_done"/></strong></br>
+                    <strong>Edité le: <span t-field="o.date_done"/></strong>
+                    <br></br>
                 </div>
             </div>
             <div style="text-align: center;position:absolute;left:678px;top:60.98px" class="cls_009">
@@ -147,35 +143,35 @@
             
             <table  style="position:absolute;left:0px;top:272.98px" class="centro bord" width="99%">
                 <tr>
-                    <th  style="text-align: center">Bénéficiaire</th>
-                    <td  style="text-align:center" width="50%"><span t-field="o.partner_id.name"/></td>
-                    <th  style="text-align: center">المستفيد</th>
+                    <th class="bord" style="text-align: center">Bénéficiaire</th>
+                    <td  class="bord" style="text-align:center" width="50%"><span t-field="o.partner_id.name"/></td>
+                    <th  class="bord" style="text-align: center">المستفيد</th>
                 </tr>
                 <tr>
-                    <th  style="text-align: center">Lieux de livraison</th>
-                    <td  style="text-align:center" ><span t-field="o.partner_id"/></td>
-                    <th  style="text-align: center">مكان التوزيع</th>
+                    <th  class="bord" style="text-align: center">Lieux de livraison</th>
+                    <td  class="bord" style="text-align:center" ><span t-field="o.location_dest_id"/></td>
+                    <th  class="bord" style="text-align: center">مكان التوزيع</th>
                 </tr>
             </table>
 
             <table  style="position:absolute;left:0px;top:410.98px" class="centro bord" width="99%">
                 <thead>
                     <tr>
-                        <th class="mark" style="text-align: center">ملاحظات<br>Observations</br></th>
-                        <th class="mark" style="text-align: center">الكمية<br>Quantité</br></th>
-                        <th class="mark" style="text-align: center">طبيعة المواد<br>Nature des produits</br></th>
-                        <th class="mark" style="text-align: center">تعيين المواد<br>Désignation</br></th>
-                        <th class="mark" style="text-align: center">الرقم الترتيبي<br>N°</br></th>
+                        <th class="mark bord" style="text-align: center">ملاحظات<br>Observations</br></th>
+                        <th class="mark bord" style="text-align: center">الكمية<br>Quantité</br></th>
+                        <th class="mark bord" style="text-align: center">طبيعة المواد<br>Nature des produits</br></th>
+                        <th class="mark bord" style="text-align: center">تعيين المواد<br>Désignation</br></th>
+                        <th class="mark bord" style="text-align: center">الرقم الترتيبي<br>N°</br></th>
                     </tr>
                 </thead>
                 <tbody>
                 <t t-foreach="o.move_line_ids_without_package" t-as="line">
                     <tr>
-                        <td  style="text-align:center" ></td>
-                        <td  style="text-align:center" ><span t-field="line.qty_done"/></td>
-                        <td  style="text-align:center" ><span t-field="line.product_id.categ_id"/></td>
-                        <td  style="text-align:center" ><span t-field="line.product_id.name"/> </td>
-                        <td  style="text-align:center" ><span t-field="line.sequence"/></td>
+                        <td class="bord" style="text-align:center" ><span t-field="line.lot_id"/></td>
+                        <td class="bord" style="text-align:center" ><span t-field="line.qty_done"/></td>
+                        <td class="bord" style="text-align:center" ><span t-field="line.product_id.categ_id"/></td>
+                        <td class="bord" style="text-align:center" ><span t-field="line.product_id.name"/> </td>
+                        <td class="bord" style="text-align:center" ><span t-field="line.sequence"/></td>
                     </tr>
                 </t>
                 </tbody>
@@ -183,9 +179,58 @@
             </table>
 
 
+                 <!-- <div class="last-page">
+                        <p style="page-break-after:always;"></p>
+                            <div style="position:absolute;left:480px;top:910.98px" >
+                            </div>
 
 
+                            <div class="n sis">
+                                توقيع المستفيد            
+                                <br>Signature du bénéificiare</br>
+                            </div>
 
+                            <div class="n sis">
+                              <strong>مكتب التموينات و تدبير المخازن</strong>            
+                                <br>Bureau des Approvisionnements </br>
+                                <br>et de la Gestion des Stock</br>
+                            </div>
+
+                    </div> -->
+
+                  <template id="external_layout_footer">
+                    <div class="footer">
+                     
+                     <div class="last-page">
+                         <table style="margin-left:auto; 
+                                margin-right:auto;
+                                width:70%;
+                                border-bottom: 2px solid black;">
+                                <tr>
+                                <td style="text-align: center" >
+                                        توقيع المستفيد            
+                                    <br>Signature du bénéificiare</br>
+                                </td>
+
+                                <td style="text-align: center">
+                                    <img t-att-src="'/pmp_report/static/src/signature.jpeg'" style="max-height: 80px" alt="Logo" t-options='{"widget": "image"}'/>
+                                </td>
+
+                                <td style="text-align: center; width:50%">
+                                    <strong>مكتب التموينات و تدبير المخازن</strong>            
+                                        <br>Bureau des Approvisionnements et de la Gestion des Stock</br>
+                                </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="text-right">        
+                            <ul class="list-inline">
+                                <span class="page"/>/<span class="topage"/>
+                            </ul>
+                        </div>   
+                    </div>     
+
+                </template>
 
 
 

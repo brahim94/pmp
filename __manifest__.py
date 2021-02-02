@@ -25,7 +25,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        # 'views/views.xml',
+        'views/layouts.xml',
         'data/sequence.xml',
         'views/pmp_stock_picking_view.xml',
         # 'static/src/attempt_inherit_pos_qweb.xml',        

@@ -18,10 +18,29 @@ def generate_qr_code(url):
     img.save(temp, format="PNG")
     qr_img = base64.b64encode(temp.getvalue())
     return qr_img
+    
 
+class PurchaseOrderLine(models.Model):
+    _inherit = "stock.move.line"
 
-class PMPStockPicking(models.Model):
+    sequence = fields.Integer(string="sequence", default=10)
+
+    number = fields.Integer(
+        compute='_compute_get_number',
+        store=True,
+    )
+    
+    @api.depends('sequence', 'picking_id')
+    def _compute_get_number(self):
+        for order in self.mapped('picking_id'):
+            number = 1
+            for line in order.move_line_ids_without_package:
+                line.number = number
+                number += 1
+
+class Picking(models.Model):
     _inherit = "stock.picking"
+    
 
     qr_image = fields.Binary("QR Code", compute='_generate_qr_code')
 
@@ -30,13 +49,22 @@ class PMPStockPicking(models.Model):
         base_url += '/web#id=%d&view_type=form&model=%s' % (self.id, self._name)
         self.qr_image = generate_qr_code(base_url)
     
-
-class PMPStockPickingLine(models.Model):
-    _inherit = "stock.move.line"
-
-    sequence = fields.Char(string="sequence")
+    def update_sequence(self):
+        sequence = 0
+        for line in self.move_line_ids_without_package:
+            sequence += 1
+            line.sequence = sequence
+        return True
 
     @api.model
     def create(self, vals):
-        vals['sequence'] = self.env['ir.sequence'].next_by_code('sequence.as') or '/'
-        return super(PMPStockPickingLine, self).create(vals)
+        res = super(Picking, self).create(vals)
+        if vals.get('move_line_ids_without_package'):
+            res.update_sequence()
+        return res
+
+    def write(self, vals):
+        res = super(Picking, self).write(vals)
+        if vals.get('move_line_ids_without_package'):
+            self.update_sequence()
+        return res

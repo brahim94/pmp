@@ -18,7 +18,8 @@
             <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
             <field name="arch" type="xml">           
                 <xpath expr="//field[@name='product_id']" position="before">
-                  <field name="sequence"/>
+                  <field name="sequence" invisible="1"/>
+                   <field name="number" string="Seq"/> 
                 </xpath>
             </field>
         </record>
@@ -45,8 +46,42 @@
                     </tr>
                 </table>
             </div>
+        
         </xpath>
+
     </template>
+
+     <template id="report_minimal_layout" inherit_id="web.minimal_layout" >
+            <xpath expr="//head" position="inside">
+              <script src='/pmp_report/static/js/pagination_hide.js'></script> <!-- Must be added in the module -->
+            </xpath>
+
+            <xpath expr="//body" position="attributes">
+                <attribute t-translation="off" name="onload">subst(); pagination_hide();</attribute>
+            </xpath>
+        </template>
+<!--     
+    <template id="external_layout_background_inherit" inherit_id="web.external_layout_background">
+        <xpath expr="//div[@class='.o_background_footer']" position="replace">
+                <div class="col-5 offset-1" name="company_address">
+                    <ul class="list-unstyled">
+                        <strong><li t-if="company.name"><span t-field="company.name"/></li></strong>
+                        <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                        <li t-if="company.phone">Tel: <span t-field="company.phone"/></li>
+                        <li t-if="company.email"><span t-field="company.email"/></li>
+                        <li t-if="company.website"><span t-field="company.website"/></li>
+                    </ul>
+                </div>
+        </xpath>
+    </template> -->
+      <!-- <template id="external_layout_footer_inherit_cr" 
+            inherit_id="report.external_layout_footer">
+            <xpath expr="//div[@class='footer']" position="replace">
+                <div class="footer">
+                     code 
+                </div>
+            </xpath>
+        </template> -->
 
     <!-- <template id="test_report" inherit_id="point_of_sale.NumpadWidget">
         <xpath expr="//div[@class='numpad']" position="replace">
